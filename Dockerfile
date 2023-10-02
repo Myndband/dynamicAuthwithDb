@@ -1,35 +1,20 @@
-# Author: Vishal B
-# pull official base image
-FROM node:16.14.0-alpine3.14 as build
-
-#working directory of containerized app
-
+# Author: Shilratna Dharmarakshak Chawhan
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-#copy the react app to the container
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet dev-certs https --trust
+RUN dotnet restore
 
-COPY . /app/
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-#prepare the container for building react
-
-RUN npm install
-
-# RUN npm install react-search-field --save
-
-RUN npm run build
-
-#prepare nginx
-
-FROM nginx:1.16.0-alpine
-COPY --from=build /app/dist/PosomScreen /usr/share/nginx/html //call your project name 
-
-RUN rm /etc/nginx/conf.d/default.conf
-
-COPY nginx/nginx.conf /etc/nginx/conf.d
-
-#fire for nginx
-
-EXPOSE 80
-
-CMD [ "nginx","-g","daemon off;" ]
-
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+#RUN apk --no-cache add curl
+COPY --from=build /app/out .
+#EXPOSE 5066 
+ENTRYPOINT ["dotnet", "DotnetAuthAndFileHandling.dll"]

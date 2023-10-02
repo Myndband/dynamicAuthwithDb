@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "W3pN2Tmg/w+Jq7ooePdcmVQvOSgLwh95zWZND6Q+28o=",
+  "Source": "DotnetAuthAndFileHandling",
+  "BasePath": "_content/DotnetAuthAndFileHandling",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "DotnetAuthAndFileHandling\\wwwroot",
+      "Source": "DotnetAuthAndFileHandling",
+      "ContentRoot": "E:\\ASP Dot Net\\Dotnet\\VerifyEmailForgotPasswordTutorial-master\\VerifyEmailForgotPasswordTutorial-master\\VerifyEmailForgotPasswordTutorial\\wwwroot\\",
+      "BasePath": "_content/DotnetAuthAndFileHandling",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
